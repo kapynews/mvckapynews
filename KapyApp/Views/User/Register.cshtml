@@ -1,0 +1,100 @@
+﻿@model KapyApp.Models.User
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h4>Register for a new account here</h4>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    if (ViewBag.Message != null)
+    {
+        //<div style="border:solid 2px green">
+        //@ViewBag.Message
+        //</div>
+
+        <div class="form-group">
+            <div class="col-md-10">@ViewBag.Message</div>
+        </div>
+    }
+
+
+
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.userName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.userEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.userEmail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.userEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.notifyFrequency, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <p>I expect to recieve a newsletter</p>
+                @Html.DropDownList("notifyFrequency", new List<SelectListItem>
+            {
+                
+                new SelectListItem { Text = "Once a week", Value ="1", Selected = true  },
+                new SelectListItem { Text = "Twice a week", Value ="2"  },
+                new SelectListItem { Text = "Three times a week", Value ="3"  },
+                new SelectListItem { Text = "Everyday", Value ="4" }
+
+            }, "Select Notify Frequency")
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Next" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("See the list of users", "Index")
+</div>

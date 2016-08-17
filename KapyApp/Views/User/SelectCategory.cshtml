@@ -1,0 +1,28 @@
+﻿
+@model IEnumerable<KapyApp.Models.Category>
+<br />
+<br />
+<br />
+<table>
+    
+
+        <tr>
+            <th>Select</th>
+            <th>Icon</th>
+            <th>Category</th>
+        </tr>
+
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(model => item.categoryName)</td>
+            
+        </tr>
+      
+            
+       
+    }
+
+</table>

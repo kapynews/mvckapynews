@@ -1,0 +1,14 @@
+﻿@model KapyApp.Models.Category
+
+
+
+@{
+    ViewBag.Title = "Category";
+}
+
+@Html.HiddenFor(model => model.categoryId)
+@Html.HiddenFor(model => model.categoryName)
+
+@Html.CheckBoxFor(model => model.isSelected)
+
+@Html.DisplayFor(model => model.categoryName)

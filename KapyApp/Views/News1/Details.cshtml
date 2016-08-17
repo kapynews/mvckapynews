@@ -1,0 +1,118 @@
+﻿@model KapyApp.Models.News1
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>News1</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @*<dt>
+            @Html.DisplayNameFor(model => model.uniqueTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.uniqueTitle)
+        </dd>*@
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Category.categoryName)*@
+            Category
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.categoryName)
+        </dd>
+        <dt>
+            @*@Html.DisplayNameFor(model => model.newsTitle)*@
+            Title:
+        </dt>
+
+        <dd>
+            <a href="@Html.DisplayFor(model => model.origUrl) ">@Html.DisplayFor(model => model.newsTitle)</a>
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.newsDate)*@
+            Date:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.newsDate)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.newsTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.newsTime)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.author)
+        </dd>
+
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Source.sourceName)*@
+            Source:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Source.sourceName)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.picUrl)*@
+
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(model => model.picUrl) "style="width:300px;height:228px;">
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.newsContent)*@
+            Content:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.newsContent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numOfClicks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numOfClicks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numOfLikes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numOfLikes)
+        </dd>
+        <dt>
+            @*@Html.DisplayNameFor(model => model.origUrl)*@
+            Orignial Link :
+        </dt>
+
+        <dd>
+            <a href="@Html.DisplayFor(model => model.origUrl) ">@Html.DisplayFor(model => model.origUrl)</a>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.newsId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,716 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="kapymvc1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Action">
+          <Key>
+            <PropertyRef Name="actionId" />
+          </Key>
+          <Property Name="actionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="actionName" Type="varchar" MaxLength="36" />
+        </EntityType>
+        <EntityType Name="ActionRecord">
+          <Key>
+            <PropertyRef Name="recordId" />
+          </Key>
+          <Property Name="recordId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="adminId" Type="int" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="actionTime" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="actionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="categoryId" />
+          </Key>
+          <Property Name="categoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="categoryName" Type="varchar" MaxLength="50" />
+          <Property Name="isSelected" Type="bit" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="commentId" />
+          </Key>
+          <Property Name="commentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="newsId" Type="int" Nullable="false" />
+          <Property Name="postTime" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="commentContent" Type="ntext" />
+          <Property Name="isDisplayed" Type="bit" Nullable="false" />
+          <Property Name="numOfComentLikes" Type="int" />
+        </EntityType>
+        <EntityType Name="News1">
+          <Key>
+            <PropertyRef Name="newsId" />
+          </Key>
+          <Property Name="newsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uniqueTitle" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="newsTitle" Type="ntext" />
+          <Property Name="newsDate" Type="date" />
+          <Property Name="newsTime" Type="time" Precision="7" />
+          <Property Name="author" Type="varchar" MaxLength="50" />
+          <Property Name="sourceId" Type="int" Nullable="false" />
+          <Property Name="categoryId" Type="int" Nullable="false" />
+          <Property Name="origUrl" Type="varchar(max)" />
+          <Property Name="picUrl" Type="varchar(max)" />
+          <Property Name="newsContent" Type="ntext" />
+          <Property Name="numOfClicks" Type="int" />
+          <Property Name="numOfLikes" Type="int" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="roleId" />
+          </Key>
+          <Property Name="roleId" Type="int" Nullable="false" />
+          <Property Name="roleName" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Source">
+          <Key>
+            <PropertyRef Name="sourceId" />
+          </Key>
+          <Property Name="sourceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sourceName" Type="varchar" MaxLength="50" />
+          <Property Name="sourceUrl" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userName" Type="varchar" MaxLength="32" />
+          <Property Name="userEmail" Type="varchar" MaxLength="64" />
+          <Property Name="password" Type="varchar" MaxLength="64" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="roleId" Type="int" />
+          <Property Name="notifyFrequency" Type="int" />
+          <Property Name="isNotified" Type="bit" />
+        </EntityType>
+        <EntityType Name="User_Category">
+          <Key>
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="categoryId" />
+          </Key>
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="categoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Source">
+          <Key>
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="sourceId" />
+          </Key>
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="sourceId" Type="int" Nullable="false" />
+          <Property Name="subscribeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="subscribeTime" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <Association Name="FK_ActionRecord_Action">
+          <End Role="Action" Type="Self.Action" Multiplicity="1" />
+          <End Role="ActionRecord" Type="Self.ActionRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Action">
+              <PropertyRef Name="actionId" />
+            </Principal>
+            <Dependent Role="ActionRecord">
+              <PropertyRef Name="actionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionRecord_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ActionRecord" Type="Self.ActionRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="ActionRecord">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionRecord_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ActionRecord" Type="Self.ActionRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="ActionRecord">
+              <PropertyRef Name="adminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News1_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="News1" Type="Self.News1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="categoryId" />
+            </Principal>
+            <Dependent Role="News1">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News1_Source">
+          <End Role="Source" Type="Self.Source" Multiplicity="1" />
+          <End Role="News1" Type="Self.News1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Source">
+              <PropertyRef Name="sourceId" />
+            </Principal>
+            <Dependent Role="News1">
+              <PropertyRef Name="sourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Category_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="User_Category" Type="Self.User_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="categoryId" />
+            </Principal>
+            <Dependent Role="User_Category">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Category_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Category" Type="Self.User_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="User_Category">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="roleId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Source_Source">
+          <End Role="Source" Type="Self.Source" Multiplicity="1" />
+          <End Role="User_Source" Type="Self.User_Source" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Source">
+              <PropertyRef Name="sourceId" />
+            </Principal>
+            <Dependent Role="User_Source">
+              <PropertyRef Name="sourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Source_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Source" Type="Self.User_Source" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="User_Source">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="kapymvc1ModelStoreContainer">
+          <EntitySet Name="Action" EntityType="Self.Action" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActionRecord" EntityType="Self.ActionRecord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="News1" EntityType="Self.News1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Source" EntityType="Self.Source" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Category" EntityType="Self.User_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Source" EntityType="Self.User_Source" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ActionRecord_Action" Association="Self.FK_ActionRecord_Action">
+            <End Role="Action" EntitySet="Action" />
+            <End Role="ActionRecord" EntitySet="ActionRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionRecord_User" Association="Self.FK_ActionRecord_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ActionRecord" EntitySet="ActionRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionRecord_User1" Association="Self.FK_ActionRecord_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="ActionRecord" EntitySet="ActionRecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_User" Association="Self.FK_Comment_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News1_Category" Association="Self.FK_News1_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="News1" EntitySet="News1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News1_Source" Association="Self.FK_News1_Source">
+            <End Role="Source" EntitySet="Source" />
+            <End Role="News1" EntitySet="News1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Category_Category" Association="Self.FK_User_Category_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="User_Category" EntitySet="User_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Category_User" Association="Self.FK_User_Category_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Category" EntitySet="User_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Source_Source" Association="Self.FK_User_Source_Source">
+            <End Role="Source" EntitySet="Source" />
+            <End Role="User_Source" EntitySet="User_Source" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Source_User" Association="Self.FK_User_Source_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Source" EntitySet="User_Source" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="kapymvc1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Action">
+          <Key>
+            <PropertyRef Name="actionId" />
+          </Key>
+          <Property Name="actionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="actionName" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ActionRecords" Relationship="Self.FK_ActionRecord_Action" FromRole="Action" ToRole="ActionRecord" />
+        </EntityType>
+        <EntityType Name="ActionRecord">
+          <Key>
+            <PropertyRef Name="recordId" />
+          </Key>
+          <Property Name="recordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="adminId" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="actionTime" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="actionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Action" Relationship="Self.FK_ActionRecord_Action" FromRole="ActionRecord" ToRole="Action" />
+          <NavigationProperty Name="User" Relationship="Self.FK_ActionRecord_User" FromRole="ActionRecord" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_ActionRecord_User1" FromRole="ActionRecord" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="categoryId" />
+          </Key>
+          <Property Name="categoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isSelected" Type="Boolean" />
+          <NavigationProperty Name="News1" Relationship="Self.FK_News1_Category" FromRole="Category" ToRole="News1" />
+          <NavigationProperty Name="Users" Relationship="Self.User_Category" FromRole="Category" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="commentId" />
+          </Key>
+          <Property Name="commentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="newsId" Type="Int32" Nullable="false" />
+          <Property Name="postTime" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="commentContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isDisplayed" Type="Boolean" Nullable="false" />
+          <Property Name="numOfComentLikes" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Comment_User" FromRole="Comment" ToRole="User" />
+        </EntityType>
+        <EntityType Name="News1">
+          <Key>
+            <PropertyRef Name="newsId" />
+          </Key>
+          <Property Name="newsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uniqueTitle" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="newsTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="newsDate" Type="DateTime" Precision="0" />
+          <Property Name="newsTime" Type="Time" Precision="7" />
+          <Property Name="author" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sourceId" Type="Int32" Nullable="false" />
+          <Property Name="categoryId" Type="Int32" Nullable="false" />
+          <Property Name="origUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="picUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="newsContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="numOfClicks" Type="Int32" />
+          <Property Name="numOfLikes" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_News1_Category" FromRole="News1" ToRole="Category" />
+          <NavigationProperty Name="Source" Relationship="Self.FK_News1_Source" FromRole="News1" ToRole="Source" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="roleId" />
+          </Key>
+          <Property Name="roleId" Type="Int32" Nullable="false" />
+          <Property Name="roleName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Source">
+          <Key>
+            <PropertyRef Name="sourceId" />
+          </Key>
+          <Property Name="sourceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sourceName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sourceUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="News1" Relationship="Self.FK_News1_Source" FromRole="Source" ToRole="News1" />
+          <NavigationProperty Name="User_Source" Relationship="Self.FK_User_Source_Source" FromRole="Source" ToRole="User_Source" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="userEmail" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="roleId" Type="Int32" />
+          <Property Name="notifyFrequency" Type="Int32" />
+          <Property Name="isNotified" Type="Boolean" />
+          <NavigationProperty Name="ActionRecords" Relationship="Self.FK_ActionRecord_User" FromRole="User" ToRole="ActionRecord" />
+          <NavigationProperty Name="ActionRecords1" Relationship="Self.FK_ActionRecord_User1" FromRole="User" ToRole="ActionRecord" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_User" FromRole="User" ToRole="Comment" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="User_Source" Relationship="Self.FK_User_Source_User" FromRole="User" ToRole="User_Source" />
+          <NavigationProperty Name="Categories" Relationship="Self.User_Category" FromRole="User" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="User_Source">
+          <Key>
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="sourceId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="sourceId" Type="Int32" Nullable="false" />
+          <Property Name="subscribeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="subscribeTime" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Source" Relationship="Self.FK_User_Source_Source" FromRole="User_Source" ToRole="Source" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Source_User" FromRole="User_Source" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_ActionRecord_Action">
+          <End Role="Action" Type="Self.Action" Multiplicity="1" />
+          <End Role="ActionRecord" Type="Self.ActionRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Action">
+              <PropertyRef Name="actionId" />
+            </Principal>
+            <Dependent Role="ActionRecord">
+              <PropertyRef Name="actionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionRecord_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ActionRecord" Type="Self.ActionRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="ActionRecord">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionRecord_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ActionRecord" Type="Self.ActionRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="ActionRecord">
+              <PropertyRef Name="adminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News1_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="News1" Type="Self.News1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="categoryId" />
+            </Principal>
+            <Dependent Role="News1">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News1_Source">
+          <End Role="Source" Type="Self.Source" Multiplicity="1" />
+          <End Role="News1" Type="Self.News1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Source">
+              <PropertyRef Name="sourceId" />
+            </Principal>
+            <Dependent Role="News1">
+              <PropertyRef Name="sourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="roleId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Source_Source">
+          <End Role="Source" Type="Self.Source" Multiplicity="1" />
+          <End Role="User_Source" Type="Self.User_Source" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Source">
+              <PropertyRef Name="sourceId" />
+            </Principal>
+            <Dependent Role="User_Source">
+              <PropertyRef Name="sourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Source_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Source" Type="Self.User_Source" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="User_Source">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="kapymvc1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actions" EntityType="Self.Action" />
+          <EntitySet Name="ActionRecords" EntityType="Self.ActionRecord" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Comments" EntityType="Self.Comment" />
+          <EntitySet Name="News1" EntityType="Self.News1" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Sources" EntityType="Self.Source" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="User_Source" EntityType="Self.User_Source" />
+          <AssociationSet Name="FK_ActionRecord_Action" Association="Self.FK_ActionRecord_Action">
+            <End Role="Action" EntitySet="Actions" />
+            <End Role="ActionRecord" EntitySet="ActionRecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionRecord_User" Association="Self.FK_ActionRecord_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ActionRecord" EntitySet="ActionRecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionRecord_User1" Association="Self.FK_ActionRecord_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ActionRecord" EntitySet="ActionRecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News1_Category" Association="Self.FK_News1_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="News1" EntitySet="News1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_User" Association="Self.FK_Comment_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News1_Source" Association="Self.FK_News1_Source">
+            <End Role="Source" EntitySet="Sources" />
+            <End Role="News1" EntitySet="News1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Source_Source" Association="Self.FK_User_Source_Source">
+            <End Role="Source" EntitySet="Sources" />
+            <End Role="User_Source" EntitySet="User_Source" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Source_User" Association="Self.FK_User_Source_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User_Source" EntitySet="User_Source" />
+          </AssociationSet>
+          <AssociationSet Name="User_Category" Association="Self.User_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="kapymvc1ModelStoreContainer" CdmEntityContainer="kapymvc1Entities">
+          <EntitySetMapping Name="Actions">
+            <EntityTypeMapping TypeName="kapymvc1Model.Action">
+              <MappingFragment StoreEntitySet="Action">
+                <ScalarProperty Name="actionId" ColumnName="actionId" />
+                <ScalarProperty Name="actionName" ColumnName="actionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActionRecords">
+            <EntityTypeMapping TypeName="kapymvc1Model.ActionRecord">
+              <MappingFragment StoreEntitySet="ActionRecord">
+                <ScalarProperty Name="recordId" ColumnName="recordId" />
+                <ScalarProperty Name="adminId" ColumnName="adminId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="actionTime" ColumnName="actionTime" />
+                <ScalarProperty Name="actionId" ColumnName="actionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="kapymvc1Model.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+                <ScalarProperty Name="isSelected" ColumnName="isSelected" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="kapymvc1Model.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="commentId" ColumnName="commentId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="newsId" ColumnName="newsId" />
+                <ScalarProperty Name="postTime" ColumnName="postTime" />
+                <ScalarProperty Name="commentContent" ColumnName="commentContent" />
+                <ScalarProperty Name="isDisplayed" ColumnName="isDisplayed" />
+                <ScalarProperty Name="numOfComentLikes" ColumnName="numOfComentLikes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News1">
+            <EntityTypeMapping TypeName="kapymvc1Model.News1">
+              <MappingFragment StoreEntitySet="News1">
+                <ScalarProperty Name="newsId" ColumnName="newsId" />
+                <ScalarProperty Name="uniqueTitle" ColumnName="uniqueTitle" />
+                <ScalarProperty Name="newsTitle" ColumnName="newsTitle" />
+                <ScalarProperty Name="newsDate" ColumnName="newsDate" />
+                <ScalarProperty Name="newsTime" ColumnName="newsTime" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="sourceId" ColumnName="sourceId" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="origUrl" ColumnName="origUrl" />
+                <ScalarProperty Name="picUrl" ColumnName="picUrl" />
+                <ScalarProperty Name="newsContent" ColumnName="newsContent" />
+                <ScalarProperty Name="numOfClicks" ColumnName="numOfClicks" />
+                <ScalarProperty Name="numOfLikes" ColumnName="numOfLikes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="kapymvc1Model.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+                <ScalarProperty Name="roleName" ColumnName="roleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sources">
+            <EntityTypeMapping TypeName="kapymvc1Model.Source">
+              <MappingFragment StoreEntitySet="Source">
+                <ScalarProperty Name="sourceId" ColumnName="sourceId" />
+                <ScalarProperty Name="sourceName" ColumnName="sourceName" />
+                <ScalarProperty Name="sourceUrl" ColumnName="sourceUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="kapymvc1Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="userEmail" ColumnName="userEmail" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+                <ScalarProperty Name="notifyFrequency" ColumnName="notifyFrequency" />
+                <ScalarProperty Name="isNotified" ColumnName="isNotified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Source">
+            <EntityTypeMapping TypeName="kapymvc1Model.User_Source">
+              <MappingFragment StoreEntitySet="User_Source">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="sourceId" ColumnName="sourceId" />
+                <ScalarProperty Name="subscribeId" ColumnName="subscribeId" />
+                <ScalarProperty Name="subscribeTime" ColumnName="subscribeTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="User_Category" TypeName="kapymvc1Model.User_Category" StoreEntitySet="User_Category">
+            <EndProperty Name="Category">
+              <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="userId" ColumnName="userId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
