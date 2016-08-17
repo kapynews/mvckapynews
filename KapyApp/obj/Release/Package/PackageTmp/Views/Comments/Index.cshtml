@@ -1,0 +1,63 @@
+﻿@model IEnumerable<KapyApp.Models.Comment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.newsId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.commentContent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isDisplayed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.numOfComentLikes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.userName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.newsId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.commentContent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isDisplayed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.numOfComentLikes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.userName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.commentId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.commentId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.commentId })
+        </td>
+    </tr>
+}
+
+</table>
