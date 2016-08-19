@@ -58,8 +58,7 @@ namespace KapyApp.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            //return View();
-            return RedirectToAction("LogIn", "User");
+            return View();
         }
 
         //
@@ -140,7 +139,7 @@ namespace KapyApp.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return RedirectToAction("Register", "User");
+            return View();
         }
 
         //

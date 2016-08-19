@@ -1,0 +1,19 @@
+﻿ @Styles.Render("~/Content/css")
+
+@model IEnumerable<KapyApp.Models.Category>
+
+
+    @*<ul class="nav navbar-nav">*@
+    <ul class="nav nav-sidebar">
+
+        @*<li><a class="navbar-brand" href="#">Top</a></li>*@
+        <li>@Html.ActionLink("Top", "Index", new { sortOrder = ViewBag.DateSortParm })</li>
+            @foreach (var item in Model)
+            {
+                <li>@Html.ActionLink(@item.categoryName, "Category", new { categoryId = item.categoryId })</li>
+            }
+
+
+
+        </ul>
+

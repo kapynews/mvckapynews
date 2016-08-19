@@ -7,10 +7,6 @@
     <title>@ViewBag.Title - Kapy News</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
-
-
-    <meta name="description" content="The description of my page" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -30,45 +26,61 @@
                     <li>@Html.ActionLink("News", "Index", "News1")</li>
                     @*<li>@Html.ActionLink("About", "About", "Home")</li> --> *@
                     @* <li>@Html.ActionLink("Contact", "Contact", "Home")</li> *@
-                    
-                   @* <li>@Html.ActionLink("Categories", "Categories", "News")</li> *@
-                    <li class="dropdown">
+
+                    @* <li>@Html.ActionLink("Categories", "Categories", "News")</li> *@
+                    @* <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Categories
                             <span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="Categories/Top News">Top News</a></li>
-                            <li><a href="Categories/Sport">Sport</a></li>
-                            <li><a href="Categories/Politics">Politics</a></li>
-                            <li><a href="Categories/World">World</a></li>
-                        </ul>
-                    </li>
+                    *@
+
                     <li>@Html.ActionLink("Search", "Search", "News")</li>  <!-- a button for searching news - the search method will be implemented in the News controller -->
+                    @*@Html.Action("CategoryDropList", "Partial")*@
 
-                    </ul>
-                    @Html.Partial("_LoginPartial")
-
-                </div>
-
-
-
+                </ul>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
+    </div>
+     
+    <div class="row row-offcanvas row-offcanvas-left">
 
+        <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
 
-
-
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - Kapy News. Kapy News is not responsible for the content of external sites.</p>
-            </footer>
+            @Html.Action("_MenuView", "News1")
         </div>
+    
+                
+                
+                    <div class="container">
+                        <div class="col-sm-9 col-md-10 main">
+                            @RenderBody()
+                        </div>
+                    </div>
+                    <footer>
+                        <p>&copy; @DateTime.Now.Year - Kapy News. Kapy News is not responsible for the content of external sites.</p>
+                    </footer>
+                </div>
+                        @*<div class="navbar navbar-inverse navbar-fixed-left">
+                            <a class="navbar-brand" href="#">Categories</a>
+                            @Html.Action("_MenuView", "News1")
+                        </div>
+                        <div class="row">
+                            @RenderBody()
+                            <hr />
+                            <footer>
+                                <p>&copy; @DateTime.Now.Year - Kapy News. Kapy News is not responsible for the content of external sites.</p>
+                            </footer>
+                        </div>
+                    </div>*@
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
-    </body>
+
+
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")
+            @RenderSection("scripts", required: false)
+</body>
     </html>
+
+
