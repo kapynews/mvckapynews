@@ -1588,7 +1588,7 @@ pre code {
 .container {
   margin-right: auto;
   margin-left: auto;
-  padding-left: 160px;
+  padding-left: 15px;
   padding-right: 15px;
 }
 @media (min-width: 768px) {
@@ -1609,11 +1609,11 @@ pre code {
 .container-fluid {
   margin-right: auto;
   margin-left: auto;
-  padding-left: 160px;
+  padding-left: 15px;
   padding-right: 15px;
 }
 .row {
-  margin-left: 150px;
+  margin-left: -15px;
   margin-right: -15px;
 }
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
@@ -4110,27 +4110,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-top: 2px;
   margin-left: 0;
 }
-.navbar-fixed-left {
-  width: 200px;
-  position: fixed;
-  border-radius: 0;
-  height: 100%;
-}
-
-.navbar-fixed-left .navbar-nav > li {
-  float: none;  /* Cancel default li float: left */
-  width: 200px;
-}
-
-.navbar-fixed-left + .container {
-  padding-left: 160px;
-}
-
-/* On using dropdown menu (To right shift popuped) */
-.navbar-fixed-left .navbar-nav > li > .dropdown-menu {
-  margin-top: -50px;
-  margin-left: 140px;
-}
 .nav-justified {
   width: 100%;
 }
@@ -4166,7 +4145,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs-justified > .active > a:focus {
   border: 1px solid #dddddd;
 }
-
 @media (min-width: 768px) {
   .nav-tabs-justified > li > a {
     border-bottom: 1px solid #dddddd;
@@ -5003,7 +4981,7 @@ a.badge:focus {
 .container .jumbotron,
 .container-fluid .jumbotron {
   border-radius: 6px;
-  padding-left: 160px;
+  padding-left: 15px;
   padding-right: 15px;
 }
 .jumbotron .container {
@@ -5016,7 +4994,7 @@ a.badge:focus {
   }
   .container .jumbotron,
   .container-fluid .jumbotron {
-    padding-left: 160px;
+    padding-left: 60px;
     padding-right: 60px;
   }
   .jumbotron h1,

@@ -43,7 +43,6 @@
     <Property Name="isDisplayed" Type="Boolean" Nullable="false" />
     <Property Name="numOfComentLikes" Type="Int32" />
     <NavigationProperty Name="User" Relationship="Self.FK_Comment_User" FromRole="Comment" ToRole="User" />
-    <NavigationProperty Name="News1" Relationship="kapymvc1Model.FK_Comment_News1" FromRole="Comment" ToRole="News1" />
   </EntityType>
   <EntityType Name="News1">
     <Key>
@@ -64,7 +63,6 @@
     <Property Name="numOfLikes" Type="Int32" />
     <NavigationProperty Name="Category" Relationship="Self.FK_News1_Category" FromRole="News1" ToRole="Category" />
     <NavigationProperty Name="Source" Relationship="Self.FK_News1_Source" FromRole="News1" ToRole="Source" />
-    <NavigationProperty Name="Comments" Relationship="kapymvc1Model.FK_Comment_News1" FromRole="News1" ToRole="Comment" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -277,21 +275,5 @@
       <End Role="Category" EntitySet="Categories" />
       <End Role="User" EntitySet="Users" />
     </AssociationSet>
-    <AssociationSet Name="FK_Comment_News1" Association="kapymvc1Model.FK_Comment_News1">
-      <End Role="News1" EntitySet="News1" />
-      <End Role="Comment" EntitySet="Comments" />
-    </AssociationSet>
   </EntityContainer>
-  <Association Name="FK_Comment_News1">
-    <End Type="kapymvc1Model.News1" Role="News1" Multiplicity="1" />
-    <End Type="kapymvc1Model.Comment" Role="Comment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="News1">
-        <PropertyRef Name="newsId" />
-      </Principal>
-      <Dependent Role="Comment">
-        <PropertyRef Name="newsId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

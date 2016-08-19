@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\tirunew\Desktop\AtiGitHubs\Yang_KapyNews-master (1)\Yang_KapyNews-master\KapyApp\Models\KapyNewsModel.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\My Documents2010_T60_061110\GitHub\KapyApp\KapyApp\Models\KapyNewsModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
