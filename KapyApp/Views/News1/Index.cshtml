@@ -6,32 +6,65 @@
 
 <h2>News</h2>
 
-@*<p>
+<p>
     @Html.ActionLink("Create New", "Create")
-</p>*@
+</p>
 <table class="table">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.uniqueTitle)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.picUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.newsTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.newsDate)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.newsTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.origUrl)
+        </th>*@
+
+        @*<th>
+            @Html.DisplayNameFor(model => model.newsContent)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.numOfClicks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.numOfLikes)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Category.categoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Source.sourceName)
+        </th>
+        <th></th>
+    </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @if (item.picUrl == "")
-            {
-                <img src="~/Content/Images/kapy_logo.png" style="width:200px;height:128px;">
-            }
-            else {
-                <img src="@Html.DisplayFor(modelItem => item.picUrl) " style="width:200px;height:128px;">
-            }
-
+            <img src="@Html.DisplayFor(modelItem => item.picUrl) " style="width:200px;height:128px;">
         </td>
         @*<td>
             @Html.DisplayFor(modelItem => item.uniqueTitle)
         </td>*@
         <td>
-                @Html.ActionLink(item.newsTitle, "Details", new { id = item.newsId })
+            @Html.ActionLink(item.newsTitle, "Details", new { id = item.newsId })
+
         </td>
         <td>
-            @*@Html.DisplayFor(modelItem => item.newsDate)*@
-            @Html.DisplayFor(modelItem => item.newsTime)
+            @Html.DisplayFor(modelItem => item.newsDate)
         </td>
         @*<td>
             @Html.DisplayFor(modelItem => item.newsTime)
