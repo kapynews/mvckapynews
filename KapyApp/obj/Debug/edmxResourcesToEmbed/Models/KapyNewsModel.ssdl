@@ -137,6 +137,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Comment_News1">
+    <End Role="News1" Type="Self.News1" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="News1">
+        <PropertyRef Name="newsId" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="newsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Comment_User">
     <End Role="User" Type="Self.User" Multiplicity="1" />
     <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
@@ -255,6 +267,10 @@
     <AssociationSet Name="FK_ActionRecord_User1" Association="Self.FK_ActionRecord_User1">
       <End Role="User" EntitySet="User" />
       <End Role="ActionRecord" EntitySet="ActionRecord" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_News1" Association="Self.FK_Comment_News1">
+      <End Role="News1" EntitySet="News1" />
+      <End Role="Comment" EntitySet="Comment" />
     </AssociationSet>
     <AssociationSet Name="FK_Comment_User" Association="Self.FK_Comment_User">
       <End Role="User" EntitySet="User" />

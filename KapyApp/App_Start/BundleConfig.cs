@@ -24,7 +24,7 @@ namespace KapyApp
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap_journal.css",
+                      "~/Content/bootstrap_lumen.css",
                       "~/Content/site.css"));
         }
     }
