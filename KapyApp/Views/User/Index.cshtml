@@ -27,40 +27,41 @@
         <th>
             @Html.DisplayNameFor(model => model.notifyFrequency)
         </th>
-  
+
         <th>
             @Html.DisplayNameFor(model => model.Role.roleName)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.userName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.userEmail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isActive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.notifyFrequency)
-        </td>
-  
-        <td>
-            @Html.DisplayFor(modelItem => item.Role.roleName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.userId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.userId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.userId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.userName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.userEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.notifyFrequency)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Role.roleName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.userId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.userId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.userId })
+            </td>
+        </tr>
+    }
 
 </table>

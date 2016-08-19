@@ -3,26 +3,41 @@
 <br />
 <br />
 <br />
-<table>
-    
-
-        <tr>
-            <th>Select</th>
-            <th>Icon</th>
-            <th>Category</th>
-        </tr>
 
 
 
-    @foreach (var item in Model)
+    <h4>Please select your favorite categories</h4>
+    <br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+
+    foreach (var item in Model)
     {
         <tr>
-            <td>@Html.DisplayFor(model => item.categoryName)</td>
-            
+            <td>
+                @Html.HiddenFor(model => item.categoryId)
+            </td>
+            <td>
+                @Html.CheckBoxFor(model => item.isSelected)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.categoryName)
+                <br />
+            </td>
         </tr>
-      
-            
-       
+
+
     }
 
-</table>
+
+    <div class="form-group">
+        <br />
+        <input type="submit" value="Register" class="btn btn-default" />
+    </div>
+
+}
+
+

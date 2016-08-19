@@ -29,5 +29,9 @@ namespace KapyApp.Models
         public virtual ICollection<News1> News1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users { get; set; }
+
+        public List<Category> Categories { get; set; }
     }
+
+   
 }

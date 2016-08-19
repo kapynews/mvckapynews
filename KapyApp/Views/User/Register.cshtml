@@ -62,11 +62,14 @@
                 <p>I expect to recieve a newsletter</p>
                 @Html.DropDownList("notifyFrequency", new List<SelectListItem>
             {
-                
                 new SelectListItem { Text = "Once a week", Value ="1", Selected = true  },
                 new SelectListItem { Text = "Twice a week", Value ="2"  },
-                new SelectListItem { Text = "Three times a week", Value ="3"  },
-                new SelectListItem { Text = "Everyday", Value ="4" }
+                new SelectListItem { Text = "Three days a week", Value ="3"  },
+                new SelectListItem { Text = "Four days a week", Value ="4"  },
+                new SelectListItem { Text = "Five days a week", Value ="5"  },
+                new SelectListItem { Text = "Six days a week", Value ="6"  },
+                new SelectListItem { Text = "Everyday", Value ="7" },
+                new SelectListItem { Text = "No Newsletter please", Value ="8" }
 
             }, "Select Notify Frequency")
 
