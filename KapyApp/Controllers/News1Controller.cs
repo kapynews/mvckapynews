@@ -15,10 +15,25 @@ namespace KapyApp.Controllers
         private kapymvc1Entities db = new kapymvc1Entities();
 
         // GET: News1
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            var news1 = db.News1.Include(n => n.Category).Include(n => n.Source);
-            return View(news1.ToList());
+            ViewBag.DateSortParm = sortOrder == "ID" ? "Time" : "ID";
+            var news = from s in db.News1
+                       select s;
+            switch (sortOrder) {
+
+                case "ID":
+                    news = news.OrderBy(s => s.newsId);
+                    break;
+                case "Time":
+                    news = news.OrderByDescending(s => s.newsTime);
+                    break;
+                default:
+                    news = news.OrderByDescending(s => s.newsTime).OrderByDescending(s => s.newsDate);
+                    break;
+            }
+            //var news1 = db.News1.Include(n => n.Category).Include(n => n.Source);
+            return View(news.ToList());
         }
 
         // GET: News1/Details/5
@@ -28,12 +43,17 @@ namespace KapyApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            News1 news1 = db.News1.Find(id);
-            if (news1 == null)
-            {
-                return HttpNotFound();
-            }
-            return View(news1);
+            else {
+
+                News1 news1 = db.News1.Find(id);
+                if (news1 == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(news1);
+
+            } 
+
         }
 
         // GET: News1/Create
@@ -133,8 +153,23 @@ namespace KapyApp.Controllers
             base.Dispose(disposing);
         }
 
- 
 
+        public ActionResult _MenuView()
+        {
+            return PartialView("_MenuView", db.Categories.ToList());
+        }
+
+        // GET: News1/Category/1
+        public ActionResult Category(int? categoryId)
+        {
+            if (categoryId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var categoryModel = db.Categories.Include("News1")
+                .Single(n => n.categoryId == categoryId);
+            return View(categoryModel);
+        }
 
     }
 }

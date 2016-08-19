@@ -80,6 +80,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -199,12 +200,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
-    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\News1Controller.cs" />
+    <Compile Include="Controllers\PartialController.cs" />
     <Compile Include="Controllers\SourcesController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -215,7 +216,6 @@
     <Compile Include="Models\ActionRecord.cs">
       <DependentUpon>KapyNewsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CategoriesSelectionViewModel.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>KapyNewsModel.tt</DependentUpon>
     </Compile>
@@ -245,7 +245,6 @@
     <Compile Include="Models\Role.cs">
       <DependentUpon>KapyNewsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SelectCategoryEditorViewModel.cs" />
     <Compile Include="Models\Source.cs">
       <DependentUpon>KapyNewsModel.tt</DependentUpon>
     </Compile>
@@ -262,6 +261,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap_journal.css" />
+    <Content Include="Content\bootstrap_lumen.css" />
+    <Content Include="Content\bootstrap_readable.css" />
+    <Content Include="Content\Images\kapy_logo.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -290,6 +292,7 @@
     <Content Include="Models\KapyNewsModel.edmx.diagram">
       <DependentUpon>KapyNewsModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\KapyApp20160816064142 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -351,21 +354,21 @@
     <Content Include="Views\Sources\Details.cshtml" />
     <Content Include="Views\Sources\Edit.cshtml" />
     <Content Include="Views\Sources\Index.cshtml" />
-    <Content Include="Views\News1\NewsList.cshtml" />
-    <Content Include="Views\User\Register.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\CreateNewAccount.cshtml" />
-    <Content Include="Views\User\Login.cshtml" />
-    <Content Include="Views\User\LoggedIn.cshtml" />
-    <Content Include="Views\Categories\CategoryIndex.cshtml" />
-    <Content Include="Views\User\SelectCategory.cshtml" />
-    <Content Include="Views\User\UserProfile.cshtml" />
-    <Content Include="Views\Categories\SelectCategoryEditorViewModel.cshtml" />
+    <Content Include="Views\Partial\CategoryDropList.cshtml" />
+    <Content Include="Views\News1\Category.cshtml" />
+    <Content Include="Views\News1\_MenuView.cshtml" />
+    <Content Include="Views\Comments\Create.cshtml" />
+    <Content Include="Views\Comments\Delete.cshtml" />
+    <Content Include="Views\Comments\Details.cshtml" />
+    <Content Include="Views\Comments\Edit.cshtml" />
+    <Content Include="Views\Comments\Index.cshtml" />
+    <Content Include="Views\Comments\CreateCommentForNews.cshtml" />
+    <Content Include="Views\Comments\CommentForNews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\CategoriyEdit\" />
-    <Folder Include="Views\UserCategory\" />
+    <Folder Include="DAL\" />
+    <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
